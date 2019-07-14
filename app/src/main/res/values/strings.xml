@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyNotifications</string>
+    <string name="channel_name">MyNotificationChannel</string>
+    <string name="channel_description">MyNotificationChannelDescription</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_text">Enter text</string>
+    <string name="CANCEL_ACTION">org.hjujgfg.mynotifications.cancel</string>
+    <string name="stop_service">Stop service</string>
+</resources>

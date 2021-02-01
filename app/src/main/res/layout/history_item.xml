@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32px"
+    android:layout_marginBottom="320dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/notification_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="sampl"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/notification_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="?android:attr/buttonBarStyle"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reremember_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/veryLightGray"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/reremember" />
+
+        <Button
+            android:id="@+id/forget_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorAccent"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/forget" />
+    </LinearLayout>
+</LinearLayout>

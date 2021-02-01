@@ -1,10 +1,15 @@
 <resources>
-    <string name="app_name">MyNotifications</string>
+    <string name="app_name">Do not forget</string>
     <string name="channel_name">MyNotificationChannel</string>
     <string name="channel_description">MyNotificationChannelDescription</string>
     <string name="create">Create</string>
     <string name="cancel">Cancel</string>
-    <string name="enter_text">Enter text</string>
+    <string name="enter_text">What you do not want to forget?</string>
     <string name="CANCEL_ACTION">org.hjujgfg.mynotifications.cancel</string>
     <string name="stop_service">Stop service</string>
+    <string name="forget">Forget</string>
+    <string name="forget_current">Forget current</string>
+    <string name="remember">Remember</string>
+    <string name="reremember">Re-remember</string>
+    <string name="prefs_file">do_not_forget</string>
 </resources>

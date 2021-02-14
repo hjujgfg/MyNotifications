@@ -1,6 +1,5 @@
 package org.hjujgfg.history;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 
 import org.hjujgfg.HistoryLoadedHandler;

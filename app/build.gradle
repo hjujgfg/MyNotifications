@@ -6,8 +6,8 @@ android {
         applicationId "org.hjujgfg"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.1"
+        versionCode 3
+        versionName "DNF stable 1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {

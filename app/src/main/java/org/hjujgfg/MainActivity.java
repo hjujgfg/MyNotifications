@@ -1,25 +1,20 @@
 package org.hjujgfg;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.room.Room;
 
-import org.hjujgfg.history.AsyncNotificationInserter;
 import org.hjujgfg.history.AsyncNotificationRetriever;
 import org.hjujgfg.history.DoNotForgetNotification;
 import org.hjujgfg.history.NotificationDatabase;
@@ -27,10 +22,6 @@ import org.hjujgfg.view.HistoricalNotificationView;
 
 import java.util.Collection;
 import java.util.Random;
-
-import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
-import static android.app.PendingIntent.getActivity;
-import static android.app.PendingIntent.getBroadcast;
 
 public class MainActivity extends AppCompatActivity implements HistoryLoadedHandler {
 

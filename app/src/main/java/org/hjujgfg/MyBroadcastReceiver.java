@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationManagerCompat;
 
@@ -25,6 +24,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 "Cancelling, got from intent: %d",
                 notificationId));
         notificationManager.cancel(notificationId);
-        context.stopService(new Intent(context, MyBackGroundService.class));
+        context.stopService(new Intent(context, NotificationService.class));
     }
 }

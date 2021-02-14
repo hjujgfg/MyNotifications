@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements HistoryLoadedHand
     private static final Random RANDOM = new Random();
     private static final String CHANNEL_ID = "TestChannel";
     public static final String NOTIFICATION_ID_KEY = "notification_id";
+    public static final String NOTIFICATION_CONTENT_KEY = "notification_content";
     NotificationManagerCompat notificationManager;
     NotificationDatabase db;
     LinearLayout historyHolder;
@@ -61,8 +63,7 @@ public class MainActivity extends AppCompatActivity implements HistoryLoadedHand
     public void show(View view) {
         TextView textView = findViewById(R.id.messageArea);
         CharSequence message = textView.getText();
-        createNotification(message.toString());
-        textView.setText("");
+        startNotification(message);
     }
 
     public void cancel(View view) {
@@ -73,56 +74,20 @@ public class MainActivity extends AppCompatActivity implements HistoryLoadedHand
         prefs.edit().putInt(NOTIFICATION_ID_KEY, -1).apply();
     }
 
-    public void stopService(View view) {
-        stopService(new Intent(this, MyBackGroundService.class));
-    }
-
-    public void createNotification(String message) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = getActivity(
-                getApplicationContext(), 0, intent, 0
-        );
-        SharedPreferences prefs = getSharedPreferences(
-                getString(R.string.prefs_file), MODE_PRIVATE
-        );
-        int prev = prefs.getInt(NOTIFICATION_ID_KEY, -1);
-        Log.i("IDS", "Found id is: " + prev);
-        if (prev > 0) {
-            notificationManager.cancel(prev);
+    public void startNotification(CharSequence message) {
+        if (message == null || message.toString().isEmpty()) {
+            Toast t = Toast.makeText(
+                    this, getString(R.string.nothing_entered), Toast.LENGTH_SHORT
+            );
+            t.show();
+            return;
         }
-
-        int id = RANDOM.nextInt(Integer.MAX_VALUE);
-
-        Intent cancelIntent = new Intent();
-        cancelIntent.setAction(getString(R.string.CANCEL_ACTION));
-        cancelIntent.putExtra(Notification.EXTRA_NOTIFICATION_ID, id);
-        PendingIntent cancelPendingIntent = getBroadcast(
-                getApplicationContext(), 0, cancelIntent, FLAG_UPDATE_CURRENT
-        );
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.dnf_no_bg_white_foreground)
-                .setContentTitle("Do not forget, man!")
-                .setContentText(message)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                .setOngoing(true)
-                .setContentIntent(pendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .addAction(
-                        R.mipmap.dnf_logo,
-                        getString(R.string.forget),
-                        cancelPendingIntent
-                );
-
-        // notificationId is a unique int for each notification that you must define
-        startService(new Intent(getApplicationContext(), MyBackGroundService.class));
-        notificationManager.notify(id, builder.build());
-        new AsyncNotificationInserter(db)
-                .execute(new DoNotForgetNotification(message));
-        triggerReloadHistory();
-        prefs.edit().putInt(NOTIFICATION_ID_KEY, id).apply();
-        Log.i("IDS", "Saving id is: " + id);
+        stopService(new Intent(getApplicationContext(), NotificationService.class));
+        Intent intent = new Intent(getApplicationContext(), NotificationService.class);
+        intent.putExtra(NOTIFICATION_CONTENT_KEY, message.toString());
+        startForegroundService(intent);
+        TextView textView = findViewById(R.id.messageArea);
+        textView.setText("");
     }
 
     private void createNotificationChannel() {

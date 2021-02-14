@@ -12,4 +12,5 @@
     <string name="remember">Remember</string>
     <string name="reremember">Re-remember</string>
     <string name="prefs_file">do_not_forget</string>
+    <string name="nothing_entered">I won\'t create a notification without text</string>
 </resources>

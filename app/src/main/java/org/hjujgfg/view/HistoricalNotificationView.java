@@ -67,7 +67,7 @@ public class HistoricalNotificationView extends LinearLayout {
                 new AsyncForgetNotification(context.getDb(), context::triggerReloadHistory)
                         .execute(notification));
         remember = view.findViewById(R.id.reremember_btn);
-        remember.setOnClickListener(v -> context.createNotification(notification.content));
+        remember.setOnClickListener(v -> context.startNotification(notification.content));
     }
 
 }

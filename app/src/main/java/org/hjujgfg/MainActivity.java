@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.room.Room;
 
+import org.hjujgfg.history.AsyncNotificationInserter;
 import org.hjujgfg.history.AsyncNotificationRetriever;
 import org.hjujgfg.history.DoNotForgetNotification;
 import org.hjujgfg.history.NotificationDatabase;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements HistoryLoadedHand
         SharedPreferences prefs = getSharedPreferences(
                 getString(R.string.prefs_file), MODE_PRIVATE
         );
-        notificationManager.cancelAll();
+        stopService(new Intent(getApplicationContext(), NotificationService.class));
         prefs.edit().putInt(NOTIFICATION_ID_KEY, -1).apply();
     }
 
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements HistoryLoadedHand
         startForegroundService(intent);
         TextView textView = findViewById(R.id.messageArea);
         textView.setText("");
+        new AsyncNotificationInserter(db)
+                .execute(new DoNotForgetNotification(message.toString()));
+        triggerReloadHistory();
     }
 
     private void createNotificationChannel() {

@@ -108,9 +108,6 @@ public class NotificationService extends Service {
         startForegroundService(new Intent(getApplicationContext(), NotificationService.class));
 
         //notificationManager.notify(id, builder.build());
-        new AsyncNotificationInserter(db)
-                .execute(new DoNotForgetNotification(message));
-        //triggerReloadHistory();
         prefs.edit().putInt(NOTIFICATION_ID_KEY, id).apply();
         Log.i("IDS", "Saving id is: " + id);
         return builder.build();

@@ -22,7 +22,7 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class HistoricalNotificationView extends LinearLayout {
 
-    private final static DateTimeFormatter FORMATTER = ofPattern("hh:mm:ss DD.MM.YYYY");
+    private final static DateTimeFormatter FORMATTER = ofPattern("HH:mm:ss dd.MM.yyyy");
 
     private DoNotForgetNotification notification;
     private View view;
